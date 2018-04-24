@@ -1,0 +1,19 @@
+language: go
+
+sudo: false
+
+env:
+  - PKG_NAME=hellowearemito/s3
+
+go:
+  - "1.10.x"
+  - "1.9.x"
+  - "1.8.x"
+  - master
+matrix:
+  allow_failures:
+    - go: master
+  fast_finish: true
+
+script:
+  - ./go-ci.sh
