@@ -125,7 +125,7 @@ func (s helper) CreateDirectory(bucket, name string) error {
 	if err != nil {
 		return err
 	}
-	err = s.Client.SetBucketPolicy(bucket, "*", policy.BucketPolicyReadOnly)
+	err = s.Client.SetBucketPolicy(bucket, policy.BucketPolicyReadOnly)
 	if err, ok := err.(minio.ErrorResponse); ok && err.StatusCode == http.StatusOK {
 		return nil
 	}
@@ -146,7 +146,7 @@ func (s helper) CreateFile(bucket, directory, fileName string, content io.Reader
 	if err != nil {
 		return err
 	}
-	err = s.Client.SetBucketPolicy(bucket, "*", policy.BucketPolicyReadOnly)
+	err = s.Client.SetBucketPolicy(bucket, policy.BucketPolicyReadOnly)
 	if err, ok := err.(minio.ErrorResponse); ok && err.StatusCode == http.StatusOK {
 		return nil
 	}
