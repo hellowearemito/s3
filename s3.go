@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/minio/minio-go"
+	minio "github.com/minio/minio-go"
 	"github.com/minio/minio-go/pkg/policy"
 	"github.com/pkg/errors"
 )
@@ -146,10 +146,7 @@ func (s helper) CreateFile(bucket, directory, fileName string, content io.Reader
 	if err != nil {
 		return err
 	}
-	err = s.Client.SetBucketPolicy(bucket, policy.BucketPolicyReadOnly)
-	if err, ok := err.(minio.ErrorResponse); ok && err.StatusCode == http.StatusOK {
-		return nil
-	}
+
 	return err
 }
 

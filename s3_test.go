@@ -255,38 +255,6 @@ func TestHelper(t *testing.T) {
 			err = s3.CreateFile(bucket, directory, fileName, content, int64(length), mime)
 			So(err, ShouldNotBeNil)
 		})
-		Convey("Fail SetBucketPolicy", func() {
-			i := 0
-			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				if i > 0 {
-					w.WriteHeader(400)
-				}
-				fmt.Fprintln(w, "{}")
-				i++
-
-			}))
-
-			url := strings.TrimPrefix(server.URL, "http://")
-			config := Config{
-				AccessKeyID:     "x",
-				Endpoint:        url,
-				Region:          "x",
-				SecretAccessKey: "x",
-				BucketName:      "x",
-				SSL:             false,
-			}
-			s3, err := New(config)
-			So(err, ShouldBeNil)
-
-			bucket := "string"
-			directory := "string"
-			fileName := "string.png"
-			content := bytes.NewReader([]byte("asdf"))
-			length := content.Len()
-			mime := "image/png"
-			err = s3.CreateFile(bucket, directory, fileName, content, int64(length), mime)
-			So(err, ShouldNotBeNil)
-		})
 	})
 	Convey("GetS3Host", t, func() {
 		endpoint := "localhost"
