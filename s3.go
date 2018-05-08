@@ -3,12 +3,10 @@ package s3
 import (
 	"chatbot/rest-api/models/validation"
 	"io"
-	"net/http"
 	"strings"
 	"time"
 
 	minio "github.com/minio/minio-go"
-	"github.com/minio/minio-go/pkg/policy"
 	"github.com/pkg/errors"
 )
 
@@ -125,10 +123,7 @@ func (s helper) CreateDirectory(bucket, name string) error {
 	if err != nil {
 		return err
 	}
-	err = s.Client.SetBucketPolicy(bucket, policy.BucketPolicyReadOnly)
-	if err, ok := err.(minio.ErrorResponse); ok && err.StatusCode == http.StatusOK {
-		return nil
-	}
+
 	return err
 }
 
