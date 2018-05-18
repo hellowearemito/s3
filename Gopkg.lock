@@ -31,13 +31,12 @@
     ".",
     "pkg/credentials",
     "pkg/encrypt",
-    "pkg/policy",
     "pkg/s3signer",
     "pkg/s3utils",
     "pkg/set"
   ]
-  revision = "3d2d02921f0510e9d1f66ef77a265b8dddd36992"
-  version = "6.0.0"
+  revision = "c6108c47ba5d86548404ebf9e51c5ca18769fe79"
+  version = "6.0.1"
 
 [[projects]]
   branch = "master"
@@ -130,6 +129,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8314bc7467f9a8454c9b158fc98f8b322df1599dc789baf5990c9c7bb0f97a3d"
+  inputs-digest = "88414de76268b9e06b1fb6b8f96e3d96308c289b4a4f1d35df5b8c913dd71b3a"
   solver-name = "gps-cdcl"
   solver-version = 1
