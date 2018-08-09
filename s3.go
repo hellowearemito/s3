@@ -1,11 +1,11 @@
 package s3
 
 import (
-	"chatbot/rest-api/models/validation"
 	"io"
 	"strings"
 	"time"
 
+	"github.com/go-ozzo/ozzo-validation"
 	minio "github.com/minio/minio-go"
 	"github.com/pkg/errors"
 )
