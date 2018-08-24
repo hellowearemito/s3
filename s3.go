@@ -156,12 +156,13 @@ func (s helper) GetFile(bucket, directory, filename string) (*minio.Object, erro
 		minio.GetObjectOptions{},
 	)
 
-	if err, ok := err.(minio.ErrorResponse); ok && (err.Code == "NoSuchKey") {
-		return nil, nil
-	}
-
 	if err != nil {
 		return nil, errors.Wrap(err, "Getobject error")
+	}
+
+	_, err = obj.Stat()
+	if err, ok := err.(minio.ErrorResponse); ok && (err.Code == "NoSuchKey") {
+		return nil, nil
 	}
 
 	return obj, nil
