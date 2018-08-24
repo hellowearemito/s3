@@ -2,6 +2,7 @@ package s3
 
 import (
 	"io"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -143,6 +144,39 @@ func (s helper) CreateFile(bucket, directory, fileName string, content io.Reader
 	}
 
 	return err
+}
+
+// GetFile returns the
+func (s helper) GetFile(bucket, directory, filename string) (*minio.Object, error) {
+	obj, err := s.Client.GetObject(
+		bucket,
+		filepath.Join(directory, filename),
+		minio.GetObjectOptions{},
+	)
+
+	if err, ok := err.(minio.ErrorResponse); ok && (err.Code == "NoSuchKey") {
+		return nil, nil
+	}
+
+	if err != nil {
+		return nil, errors.Wrap(err, "Getobject error")
+	}
+
+	return obj, nil
+}
+
+// FileExists returns the file exists or not.
+func (s helper) FileExists(bucket, directory, filename string) (bool, error) {
+	obj, err := s.GetFile(bucket, directory, filename)
+	if err != nil {
+		return false, err
+	}
+
+	if obj == nil {
+		return false, nil
+	}
+
+	return true, nil
 }
 
 // GetS3Host returns S3 host.
