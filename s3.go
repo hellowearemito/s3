@@ -43,6 +43,8 @@ type Helper interface {
 	ListOfBucket() ([]string, error)
 	ListOfBucketFolder(bucketName string, isRecursive bool) (*Folder, error)
 	GetBucketName() string
+	GetFile(bucket, directory, filename string) (*minio.Object, error)
+	FileExists(bucket, directory, filename string) (bool, error)
 }
 
 // Folder represents the folder structure in s3.
