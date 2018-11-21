@@ -105,7 +105,7 @@ func New(config Config) (Helper, error) {
 // CreateBucket make new bucket on s3
 func (s helper) CreateBucket(name string) error {
 	if !s.Enabled {
-		return nil
+		return errors.New("server is not enabled")
 	}
 
 	return s.Client.MakeBucket(name, s.Config.Region)
@@ -114,7 +114,7 @@ func (s helper) CreateBucket(name string) error {
 // CreateDirectory make new directory in a bucket
 func (s helper) CreateDirectory(bucket, name string) error {
 	if !s.Enabled {
-		return nil
+		return errors.New("server is not enabled")
 	}
 
 	opts := minio.PutObjectOptions{
@@ -133,7 +133,7 @@ func (s helper) CreateDirectory(bucket, name string) error {
 // CreateFile make new file in specific directory in a specific bucket
 func (s helper) CreateFile(bucket, directory, fileName string, content io.Reader, length int64, mime string) error {
 	if !s.Enabled {
-		return nil
+		return errors.New("server is not enabled")
 	}
 
 	opts := minio.PutObjectOptions{
@@ -190,7 +190,7 @@ func (s helper) GetS3Host() string {
 // BucketExists checks the bucket exists or not.
 func (s helper) BucketExists(bucket string) (bool, error) {
 	if !s.Enabled {
-		return false, nil
+		return false, errors.New("server is not enabled")
 	}
 
 	exists, err := s.Client.BucketExists(bucket)

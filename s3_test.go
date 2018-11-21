@@ -99,7 +99,7 @@ func TestHelper(t *testing.T) {
 			}
 
 			err := s3.CreateBucket("x")
-			So(err, ShouldBeNil)
+			So(err, ShouldNotBeNil)
 		})
 
 	})
@@ -111,7 +111,7 @@ func TestHelper(t *testing.T) {
 			}
 
 			err := s3.CreateDirectory("x", "asd")
-			So(err, ShouldBeNil)
+			So(err, ShouldNotBeNil)
 		})
 
 		Convey("PutObject", func() {
@@ -160,7 +160,7 @@ func TestHelper(t *testing.T) {
 
 				bucket := "x43563"
 				err = s3.CreateDirectory(bucket, "1234678")
-				So(err, ShouldNotBeNil)
+				So(err, ShouldBeNil)
 			})
 
 			Convey("Error", func() {
@@ -201,7 +201,7 @@ func TestHelper(t *testing.T) {
 			length := int64(60)
 			mime := "string"
 			err := s3.CreateFile(bucket, directory, fileName, content, length, mime)
-			So(err, ShouldBeNil)
+			So(err, ShouldNotBeNil)
 		})
 		Convey("Success", func() {
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -295,7 +295,7 @@ func TestHelper(t *testing.T) {
 			}
 
 			res, err := s3.BucketExists("x")
-			So(err, ShouldBeNil)
+			So(err, ShouldNotBeNil)
 			So(res, ShouldBeFalse)
 		})
 	})
