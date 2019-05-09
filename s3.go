@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-ozzo/ozzo-validation"
+	validation "github.com/go-ozzo/ozzo-validation"
 	minio "github.com/minio/minio-go"
 	"github.com/pkg/errors"
 )
