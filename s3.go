@@ -13,12 +13,12 @@ import (
 
 // Config represents the s3 configuration.
 type Config struct {
-	Endpoint        string
-	AccessKeyID     string
-	SecretAccessKey string
-	Region          string
-	SSL             bool
-	BucketName      string
+	Endpoint        string `json:"endpoint"`
+	AccessKeyID     string `json:"access_key_id"`
+	SecretAccessKey string `json:"secret_access_key"`
+	Region          string `json:"region"`
+	SSL             bool `json:"ssl"`
+	BucketName      string `json:"bucket_name"`
 }
 
 // Validate validates the struct.
