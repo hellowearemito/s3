@@ -258,3 +258,31 @@ func (s helper) ListOfBucketFolder(bucketName string, isRecursive bool) (*Folder
 func (s helper) GetBucketName() string {
 	return s.Config.BucketName
 }
+
+// RemoveBucket removes the given bucket.
+func (s helper) RemoveBucket(bucket string) error {
+	err := s.Client.RemoveBucket(bucket)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// RemoveDirectory removes the given directory.
+func (s helper) RemoveDirectory(bucket, directory string) error {
+	err := s.Client.RemoveObject(bucket, directory)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// RemoveFiles removes the given file from directory.
+func (s helper) RemoveFile(bucket, directory, fileName string) error {
+	err := s.Client.RemoveObject(bucket, directory+"/"+fileName)
+	if err != nil {
+		return err
+	}
+	return nil
+}
