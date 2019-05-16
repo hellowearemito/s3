@@ -45,6 +45,9 @@ type Helper interface {
 	GetBucketName() string
 	GetFile(bucket, directory, filename string) (*minio.Object, error)
 	FileExists(bucket, directory, filename string) (bool, error)
+	RemoveBucket(bucket string) error
+	RemoveDirectory(bucket, directory string) error
+	RemoveFile(bucket, directory, fileName string) error
 }
 
 // Folder represents the folder structure in s3.
